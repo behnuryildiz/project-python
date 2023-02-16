@@ -4,15 +4,18 @@
 * use database_X;
 * show tables;
 * drop database database_X;
-* show grants for 'user'@'localhost';
-* create user 'new_user'@'localhost' IDENTIFIED BY 'Password' with mysql_native_password;
 
->> OR FOR ALREADY EXISTING USER:
-* FLUSH PRIVILEGES;
-* RENAME USER 'new_user'@'localhost' TO 'sammy'@'remote_server_ip';
-
->> to see the rights of a particular user:
+[!] To see the rights of a particular user:
 * SHOW GRANTS FOR 'root'@'localhost';
 
->> the following SQL command to see the list of users and their privileges:
+[!!] the following SQL command to see the list of users and their privileges:
 * SELECT user, host, authentication_string, plugin FROM mysql.user; 
+
+[!!!] How to create a new user with new privileges?
+* CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password' WITH mysql_native_password;
+* GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost';
+# to activate these privileges:
+* FLUSH PRIVILEGES;
+
+[!!!!] How to rename an existing user?
+* RENAME USER 'new_user'@'localhost' TO 'sammy'@'remote_server_ip';
