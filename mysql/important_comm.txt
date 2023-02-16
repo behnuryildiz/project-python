@@ -6,8 +6,13 @@
 * drop database database_X;
 * show grants for 'user'@'localhost';
 * create user 'new_user'@'localhost' IDENTIFIED BY 'Password' with mysql_native_password;
->>  OR FOR ALREADY EXISTING USER
+
+>> OR FOR ALREADY EXISTING USER:
 * FLUSH PRIVILEGES;
 * RENAME USER 'new_user'@'localhost' TO 'sammy'@'remote_server_ip';
->> to see the rights of an user
+
+>> to see the rights of a particular user:
 * SHOW GRANTS FOR 'root'@'localhost';
+
+>> the following SQL command to see the list of users and their privileges:
+* SELECT user, host, authentication_string, plugin FROM mysql.user; 
