@@ -2,10 +2,12 @@
 
 #firstly created the mysql based container with own appointed env datas
 docker build -t my-mysql-image .
-sleep 3
 
+#creation of a new bridge network to be connected by mysql and python-api app contaieners
 docker network create api-network
-sleep 3
+
+#the main mysql service and client system must be stopped in order to make the default port 3306 free
+sudo service mysql stop
 
 #secondly created the mysql container with own created mysql-image
 docker run -dp 3306:3306 --name mysql-container --network api-network -v mysql_data:/var/lib/mysql my-mysql-image
