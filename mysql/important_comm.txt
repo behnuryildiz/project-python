@@ -1,4 +1,4 @@
-# the most important mysql commands while troubleshooting needed
+# the most important mysql commands while troubleshooting and in mysql database needed
 * select user from mysql.user;
 * show databases;
 * use database_X;
