@@ -1,0 +1,6 @@
+0. apt-get install pip
+1. pip install Flask
+2. pip install mysql-connector-python
+3. import mysql.connector
+4. pip install flask-restful 
+5. 

@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import mysql.connector
-from flask_restful import Api
+from flask_restful import Resource, Api
 from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ app.config['MYSQL_DB'] = MYSQL_DATABASE
 
 
 
-# Endpoint to retrieve all users
+# Endpoint to retrieve all owners
 @app.route('/owners', methods=['GET'])
 def get_owners():
     cursor = db.cursor()
@@ -26,7 +26,7 @@ def get_owners():
         owners.append(owners)
     return jsonify(owners)
 
-# Endpoint to add a new user
+# Endpoint to add a new owner
 @app.route('/owners/add', methods=['POST'])
 def add_owners():
     data = request.get_json()

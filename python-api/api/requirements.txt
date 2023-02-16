@@ -1,2 +1,4 @@
 Flask
 Flask-MySQLdb
+mysql-connector-python
+flask-restful
