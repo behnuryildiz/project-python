@@ -6,6 +6,9 @@ from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DAT
 app = Flask(__name__)
 api = Api(app)
 
+db = mysql.connector.connect()
+
+
 # MySQL connection parameters
 app.config['MYSQL_HOST'] = MYSQL_HOST
 app.config['MYSQL_PORT'] = MYSQL_PORT
