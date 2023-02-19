@@ -18,6 +18,14 @@ app.config['MYSQL_DB'] = MYSQL_DATABASE
 
 
 
+# Home Page 
+@app.route("/")
+def home():
+    return "Welcome to my API!"
+
+if __name__ == "__main__":
+    app.run()
+
 # Endpoint to retrieve all owners
 @app.route('/owners', methods=['GET'])
 def get_owners():
