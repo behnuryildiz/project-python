@@ -11,10 +11,10 @@ docker network create api-network
 service mysql stop
 
 #secondly created the mysql container with own created mysql-image
-docker run -ti -p 3306:3306 --name mysql-container --network api-network -v mysql_data:/var/lib/mysql my-mysql-image bash
+docker run -it -p 3306:3306 --name mysql-container --network api-network -v mysql_data:/var/lib/mysql my-mysql-image bash
 
-docker exec -it mysql-container bash -c "apt-get update && apt-get install mysql-client"
+#docker exec -it mysql-container bash -c "apt-get update && apt-get install mysql-client"
 
 # creation of table
-#docker exec -it mysql-container /bin/bash -c "mysql -u root -pPassword <./table.sql "
+#docker exec -it mysql-container /bin/bash -c "mysql -u root -pPassword <./init.sql "
 
