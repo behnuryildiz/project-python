@@ -4,18 +4,30 @@
 * use database_X;
 * show tables;
 * drop database database_X;
+* drop user ' username ' @ ' host ';
 
 [!] To see the rights of a particular user:
-* SHOW GRANTS FOR 'root'@'localhost';
+SHOW GRANTS FOR 'root'@'%';
 
 [!!] the following SQL command to see the list of users and their privileges:
-* SELECT user, host, authentication_string, plugin FROM mysql.user; 
+SELECT user, host, authentication_string, plugin FROM mysql.user; 
 
 [!!!] How to create a new user with new privileges? (% is for connection from any host)
-* CREATE USER 'newuser'@'%' IDENTIFIED WITH mysql_native_password BY 'Password';
-* GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'localhost';
+CREATE USER 'newuser'@'%' IDENTIFIED BY 'Password';
+GRANT ALL PRIVILEGES ON *.* TO 'newuser'@'%';
 # to activate these privileges:
-* FLUSH PRIVILEGES;
+FLUSH PRIVILEGES;
 
 [!!!!] How to rename an existing user?
 * RENAME USER 'new_user'@'localhost' TO 'sammy'@'remote_server_ip';
+
+SELECT PASSWORD('Password');
+
+SELECT * from mysql.user where User="root";
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
+
+sudo mysql_secure_installation
+
+commands;
+mysql -u root -pPassword 

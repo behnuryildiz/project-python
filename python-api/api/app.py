@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import mysql.connector
 from flask_restful import Resource, Api
-from config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
+from config import MYSQL_HOSTNAME, MYSQL_PORT, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_DATABASE
 
 app = Flask(__name__)
 api = Api(app)
@@ -10,9 +10,9 @@ db = mysql.connector.connect()
 
 
 # MySQL connection parameters
-app.config['MYSQL_HOST'] = MYSQL_HOST
+app.config['MYSQL_HOSTNAME'] = MYSQL_HOSTNAME
 app.config['MYSQL_PORT'] = MYSQL_PORT
-app.config['MYSQL_USER'] = MYSQL_USER
+app.config['MYSQL_USERNAME'] = MYSQL_USERNAME
 app.config['MYSQL_PASSWORD'] = MYSQL_PASSWORD
 app.config['MYSQL_DB'] = MYSQL_DATABASE
 
@@ -37,6 +37,18 @@ def get_owners():
         owners.append(owners)
     return jsonify(owners)
 
+
+@app.route('/pets', methods=['GET'])
+def get_pets():
+    cursor = db.cursor()
+    cursor.execute('SELECT pet_name, species FROM pets')
+    pets = []
+    for (pet_name, species) in cursor:
+        pets = {'pet_name': pet_name, 'species': species}
+        pets.append(pets)
+    return jsonify(pets)
+
+    
 # Endpoint to add a new owner
 @app.route('/owners/add', methods=['POST'])
 def add_owners():
@@ -50,10 +62,15 @@ def add_owners():
     return jsonify({'message': 'Owner added successfully'})
 
 # Endpoint to delete a user by ID
-@app.route('/owners/<int:first_name>', methods=['DELETE'])
-def delete_owner(first_name):
+@app.route('/owners/<int:ownerId>', methods=['DELETE'])
+def delete_owner(ownerId: int):
     cursor = db.cursor()
-    cursor.execute('DELETE FROM owners WHERE first_name = %s', (user_id))
+    cursor.execute('DELETE FROM owners WHERE ownerId = %s', (ownerId))
+
+@app.route('/pets/<int:petId>', methods=['DELETE'])
+def delete_pet(petId: int):
+    cursor = db.cursor()
+    cursor.execute('DELETE FROM pets WHERE petId = %s', (petId))
 
 
 if __name__ == '__main__':
